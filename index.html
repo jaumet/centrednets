@@ -16,7 +16,7 @@
     
   </body>
   
-  <script src="./data/gen.js"></script> 
+  <script src="./data/gen2.js"></script> 
   <script>
     $(document).ready(function(){
     		// 0- CONFIG
@@ -48,10 +48,12 @@
 				if (i!=this.id)	{	
 					st[i].attr({"r": s[this.id][i]}); 
 					st[i].attr({fill: node[i][2]});
+					st[i].attr({"fill-opacity": 0.4});
 					//alert(" | Node id ->"+this.id+" | Similarity: ["+[this.id]+"]["+[i]+"] ->"+s[this.id][i]); 
 				} else {
 					st[i].attr({"fill": "black"});
 					st[i].attr({"r": 10});
+					st[i].attr({"fill-opacity": 1});
 				}
 			}
 		});
