@@ -10,24 +10,28 @@
     <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.3/themes/base/jquery-ui.css" type="text/css"/>
   </head>
   <body>
-    <div id="main"></div>
-    <div id="slider" data-wjs-element="main"></div>
+    <div id="main" class="map"></div>
+    <div id="main2" class="map"></div>
+    <div id="slider" data-wjs-element="main main2"></div>
         <div id="name"></div>
   </body>
   
-  <script src="./data/gen3.js"></script> 
+  <script src="./data/gen4.js"></script> 
   <script>
     $(document).ready(function(){
     		// 0- CONFIG
     		var radius = 10;
     		
 		// 2- MAP
-		// Creating canvas 320 × 200 at 10, 50
-		var paper = Raphael(1, 1, 900, 900);		
+		// Creating map 1
+		var paper = Raphael(1, 1, 900, 900);
+		// Creating map 2
+		var paper2 = Raphael(950, 1, 900, 900);
 		
 		// Creating array-like with all the nodes
 		var st = paper.set();
-		
+		var st2 = paper2.set();
+				
 		function donode(myid, posx, posy, radius, fill) {
 			c = paper.circle(posx, posy, radius)
 				.attr("fill", fill);
@@ -46,39 +50,73 @@
 			st.push(c);
 		}
 		
+		// Map 2
+		function donode2(myid, posx, posy, radius, fill) {
+			c2 = paper2.circle(posx, posy, radius)
+				.attr("fill", "red");
+			c2.id = myid;
+			c2[0].onmouseover =  function () {
+				$("#name").css('position','absolute')
+					.css('left',node[myid][0]+10)
+					.css('top',node[myid][1]-30)
+					.append(node[myid][3])
+					.show();
+			}
+			c2[0].onmouseout =  function () {
+				$("#name").empty()
+					.hide();
+			}
+			st2.push(c2);
+		}		
 		for (var i = 0; i < node.length; i++) {
 			donode(i, node[i][0], node[i][1], radius, node[i][2]);
-		}		
+			donode2(i, node[i][0], node[i][1], radius, node[i][2]);
+		}	
 		
 		// 3- INTERACTION/TRANSFORMATION
 		st.click(function () {
 			for (var i = 0; i < st.length; i++) {
-				//st[i].attr({"r": i*10+10});
-				// Hardcoded example for clic on node 2: 		
 				if (i!=this.id)	{	
-					st[i].attr({"r": s[this.id][i]}); 
-					st[i].attr({fill: node[i][2]});
-					st[i].attr({"fill-opacity": 0.4});
-					//alert(" | Node id ->"+this.id+" | Similarity: ["+[this.id]+"]["+[i]+"] ->"+s[this.id][i]); 
+					if (s[this.id][i] == "0.0") {
+						st[i].attr({"r": 10})
+							.attr({"fill": "white"})
+							.attr({"fill-opacity": 0.1})
+							.attr({"stroke-color": "red"});
+						st2[i].attr({"r": 10})
+							.attr({"fill": "white"})
+							.attr({"fill-opacity": 0.1})
+							.attr({"stroke-color": "red"});
+					} else {
+						st[i].attr({"r": s[this.id][i]})
+							.attr({fill: node[i][2]})
+							.attr({"fill-opacity": 0.5});
+						st2[i].attr({"r": s[this.id][i]})
+							.attr({fill: node[i][2]})
+							.attr({"fill-opacity": 0.5});
+					}
 				} else {
-					st[i].attr({"fill": "black"});
-					st[i].attr({"r": 10});
-					st[i].attr({"fill-opacity": 1});
+					st[i].attr({"fill": "black"})
+						.attr({"r": 10})
+						.attr({"fill-opacity": 1});
+					st2[i].attr({"fill": "black"})
+						.attr({"r": 10})
+						.attr({"fill-opacity": 1});
 				}
 			}
 		});
-			//Step 1: set up the slider with some options. The valid values for opacity are 0 to 1
-			//Step 2: Bind an event so when you slide the slider and stop, the following function gets called
-			$('#slider').slider({ 
+		//Step 1: set up the slider with some options. The valid values for opacity are 0 to 1
+		//Step 2: Bind an event so when you slide the slider and stop, the following function gets called
+		$('#slider').slider({ 
 			min: 0, 
 			max: 1, 
 			step: 0.01, 
 			value: 0,
 			orientation: "horizontal",
-			     slide: function(e,ui){
-				     $('#main').css('opacity', ui.value)
-			     }                
-			})
-   });
+			slide: function(e,ui){
+				$('#main').css('opacity', ui.value);
+				$('#main2').css('opacity', ui.value)
+			}
+		})
+    });
   </script>
 </html>
