@@ -18,6 +18,26 @@
 	background-repeat: no-repeat;
 	opacity:0.3;
 }
+.map1 {
+	position:absolute;
+	width:900px;
+	height:900px;
+	border:2px solid grey;
+	background:url('../img/map1.png');
+	background-size: cover;
+	background-repeat: no-repeat;
+	opacity:0.3;
+}
+.map2 {
+	position:absolute;
+	width:900px;
+	height:900px;
+	border:2px solid grey;
+	background:url('../img/map2.png');
+	background-size: cover;
+	background-repeat: no-repeat;
+	opacity:0.3;
+}
 #slider { width: 150px; }
 
 #name {
