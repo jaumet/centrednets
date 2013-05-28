@@ -56,24 +56,30 @@
 		// interaction: show similarities on click
 		var renode = function () {
 			for (var i = 0; i < st.length; i++) {
-				if (i!=this.id)	{	
-					if (s[this.id][i] == "0.0") {
-						st[i].attr({"r": 10})
-							.attr({"fill": "white"})
-							.attr({"fill-opacity": 0.1})
-							.attr({"stroke": "black"})
-							.attr({"stroke-width": "3px"});
-					} else {
-						st[i].attr({"r": s[this.id][i]*10})
-							.attr({fill: node[i][2]})
-							.attr({"fill-opacity": 0.5})
-							.attr({"stroke-width": "1px"});
-					}
-				} else {
-					st[i].attr({"fill": "black"})
-						.attr({"r": 10})
-						.attr({"fill-opacity": 1});
-				}
+                                if (i!=this.id) {       
+                                        if (s[this.id][i] == "0.0") {
+                                                st[i].attr({"r": 10})
+                                                        //.attr({"fill": "white"})
+                                                        .attr({fill: node[i][2]})
+                                                        .attr({"fill-opacity": 0.4})
+                                                        .attr({"stroke": "grey"})
+                                                        .attr({"stroke-width": "0px"});
+                                        } else {
+                                                st[i].attr({"r": s[this.id][i]*10})
+                                                        .attr({fill: node[i][2]})
+                                                        .attr({"fill-opacity": 0.6})
+                                                        .attr({"stroke": "grey"})
+                                                        .attr({"stroke-width": "4px"});
+                                        }
+                                } else {
+                                        st[i].attr({"fill": "black"})
+                                                .attr({"r": 10})
+                                                .attr({"fill-opacity": 0.6})
+                                                .attr({"stroke": node[i][2]})
+                                                .attr({"fill": "black"})
+                                                .attr({"stroke-width": "7px"})
+                                                .attr({"fill-opacity": 1});
+                                }
 			}
 		};
 		// create interaction in map 1 and 2

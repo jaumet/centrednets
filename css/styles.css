@@ -26,7 +26,7 @@
 	background:url('../img/map1.png');
 	background-size: cover;
 	background-repeat: no-repeat;
-	opacity:0.3;
+	opacity:0.6;
 }
 .map2 {
 	position:absolute;
@@ -36,9 +36,14 @@
 	background:url('../img/map2.png');
 	background-size: cover;
 	background-repeat: no-repeat;
-	opacity:0.3;
+	opacity:0.6;
 }
-#slider { width: 150px; }
+#slider { 
+	width: 150px; 
+	padding-left:20px;
+}
+#slider .ui-state-default { border: 1px solid #aaaaaa; background: orange; }
+#slider .ui-state-default { background-image: url('slider-button.png'); }
 
 #name {
 	z-index:10;
